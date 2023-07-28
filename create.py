@@ -1,10 +1,10 @@
 # 必要なモジュールのインポート
 import os
+import streamlit as st
 # 環境変数の設定
 os.environ["OPENAI_API_KEY"] = st.secrets["OpenAIAPI"]["OPENAI_API_KEY"]
 
 import openai
-import streamlit as st
 from PIL import Image
 import requests
 from io import BytesIO
