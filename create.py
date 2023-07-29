@@ -15,7 +15,7 @@ from io import BytesIO
 st.set_page_config(page_title='text2image', page_icon=":smiley:", layout='centered', initial_sidebar_state='auto')
 st.title('プロ顔負け‼️ 誰でも簡単画像生成')
 
-st.sidebar.image('data\image_1.png')
+st.sidebar.image('data/image_1.png')
 
 # スタイルの選択
 style_list = ['Anime','Photographic','Digital Art', 'Comic Book', 'Fantasy Art', 'Analog Film', 'Neon Punk', 
