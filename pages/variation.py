@@ -7,13 +7,13 @@ from io import BytesIO
 
 
 # 画像をアップロード
-uploaded_image = st.file_uploader("画像（.png）をアップロードしてください ※正方形4MB未満", type=["png"])
+uploaded_image = st.file_uploader("画像（.png）をアップロードしてください ※4MB未満", type=["png"])
 
 # 画像がアップロードされたら、それをPIL Imageとして読み込む
 if uploaded_image is not None:
     # Check if the image size is less than 4MB
     if len(uploaded_image.getvalue()) <= 4 * 1024 * 1024:  # 4MB in bytes
-        image = Image.open(uploaded_image)
+        image = Image.open(uploaded_image).convert('RGB')  # Convert the image to RGB
         st.image(image, caption='アップロード画像', use_column_width=True)
     else:
         st.error("アップロードされた画像は4MBを超えています。4MB未満の画像をアップロードしてください。")
@@ -24,8 +24,12 @@ if st.button('画像生成') and uploaded_image is not None:
         image_bytes_list = []
 
         for _ in range(2):
+            buffered = BytesIO()
+            image.save(buffered, format="PNG")  # Save the converted image into BytesIO object
+            img_byte = buffered.getvalue()  # Get the binary representation
+
             response = openai.Image.create_variation(
-                image=uploaded_image.getvalue(),
+                image=img_byte,
                 n=2,
                 size="512x512"
             )
