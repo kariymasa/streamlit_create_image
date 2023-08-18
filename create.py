@@ -49,7 +49,7 @@ if "translated_text" not in st.session_state or st.session_state.prev_text_input
     st.session_state.translated_text = response_translation["choices"][0]["text"].strip()
     st.session_state.prev_text_input = text_input
 
-prompt = style + "," + quality + "," + st.session_state.translated_text
+prompt = style + "style ," + quality + "," + st.session_state.translated_text
 
 # 翻訳結果の表示
 st.text("翻訳結果（プロンプト）: " + prompt)
