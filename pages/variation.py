@@ -9,6 +9,9 @@ from io import BytesIO
 # 画像をアップロード
 uploaded_image = st.file_uploader("画像（.png）をアップロードしてください ※4MB未満", type=["png"])
 
+# 禁止コメントを表示
+st.warning("同意なく人物の画像をアップロードすること、使用権のない画像をアップロードすることは禁止されています。")
+
 # 画像がアップロードされたら、それをPIL Imageとして読み込む
 if uploaded_image is not None:
     # Check if the image size is less than 4MB

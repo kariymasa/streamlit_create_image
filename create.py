@@ -13,7 +13,7 @@ from io import BytesIO
 
 # Streamlitの設定
 st.set_page_config(page_title='text2image', page_icon=":smiley:", layout='centered', initial_sidebar_state='auto')
-st.title('プロ顔負け‼️ 誰でも簡単画像生成')
+st.title('「アートの瞬間、あなたの手中に」')
 
 st.sidebar.image('data/image_1.png')
 
@@ -21,6 +21,15 @@ st.sidebar.image('data/image_1.png')
 style_list = ['Anime','Photographic','Digital Art', 'Comic Book', 'Fantasy Art', 'Analog Film', 'Neon Punk', 
               'Isometric', 'Low Poly', 'Origami', 'Line Art', 'Cinematc', '3D Model', 'Pixel Art']
 style = st.sidebar.selectbox('スタイルを選択してください。', style_list)
+
+# Qualityリストの選択
+quality_list = ['Masterpiece', 'high quality', 'epic high quality', 'best quality', 'detailed', 'highly detailed', 
+                'insanely detailed', 'hyper realistic', '4K']
+quality = st.sidebar.selectbox('クオリティを選択してください。', quality_list)
+
+# 画像のサイズを選択
+size_list = ["512x512", "1024x1024", "256x256"]
+size = st.sidebar.radio('画像のサイズを選択してください。', size_list, index=0)
 
 # プロンプトの入力
 text_input = st.text_input('生成したい画像を日本語で入力してください。')
@@ -40,7 +49,7 @@ if "translated_text" not in st.session_state or st.session_state.prev_text_input
     st.session_state.translated_text = response_translation["choices"][0]["text"].strip()
     st.session_state.prev_text_input = text_input
 
-prompt = style + "," + st.session_state.translated_text
+prompt = style + "," + quality + "," + st.session_state.translated_text
 
 # 翻訳結果の表示
 st.text("翻訳結果（プロンプト）: " + prompt)
@@ -56,7 +65,7 @@ if st.button('画像生成'):
         for _ in range(num_images):
             response = openai.Image.create(
                 prompt=prompt,
-                size="512x512"
+                size=size
             )
             image_url = response["data"][0]["url"]
 
