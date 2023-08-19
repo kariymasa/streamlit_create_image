@@ -18,7 +18,7 @@ st.title('「アートの瞬間、あなたの手中に」')
 st.sidebar.image('data/image_1.png')
 
 # スタイルの選択
-style_list = ['Anime','Photographic','Digital Art', 'Comic Book', 'Fantasy Art', 'Analog Film', 'Neon Punk', 
+style_list = ['Anime','Photographic', 'painted in the style of Vincent van Gogh', 'Studio Ghibli', 'Digital Art', 'Comic Book', 'Fantasy Art', 'Analog Film', 'Neon Punk', 
               'Isometric', 'Low Poly', 'Origami', 'Line Art', 'Cinematc', '3D Model', 'Pixel Art']
 style = st.sidebar.selectbox('スタイルを選択してください。', style_list)
 
